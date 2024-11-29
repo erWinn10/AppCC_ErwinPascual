@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="40dp"
+        app:cardElevation="0dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#EFEFEF">
+
+
+            <TextView
+                android:id="@+id/textView300"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="28dp"
+                android:fontFamily="@font/klee_onee"
+                android:text="Editar Colección"
+                android:textColor="@color/azuloscuro"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView400"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="48dp"
+                android:layout_marginTop="36dp"
+                android:fontFamily="@font/ibm_plex_sans_devanagari"
+                android:text="Nombre: "
+                android:textColor="@color/grizzoscuro"
+                android:visibility="visible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView300" />
+
+            <EditText
+                android:id="@+id/etLNombreColEd"
+                android:layout_width="230dp"
+                android:layout_height="50dp"
+                android:layout_marginHorizontal="50dp"
+                android:layout_marginStart="48dp"
+                android:layout_marginTop="4dp"
+                android:ems="10"
+                android:inputType="text"
+                android:text=""
+                android:textColor="@color/grizzoscuro"
+                android:visibility="visible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView400" />
+
+            <TextView
+                android:id="@+id/textView500"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="48dp"
+                android:layout_marginTop="36dp"
+                android:fontFamily="@font/ibm_plex_sans_devanagari"
+                android:text="Descripcion: "
+                android:textColor="@color/grizzoscuro"
+                android:visibility="visible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etLNombreColEd" />
+
+            <EditText
+                android:id="@+id/etLDescripColEd"
+                android:layout_width="230dp"
+                android:layout_height="50dp"
+                android:layout_marginHorizontal="50dp"
+                android:layout_marginStart="48dp"
+                android:layout_marginTop="4dp"
+                android:ems="10"
+                android:inputType="text"
+                android:text=""
+                android:textColor="@color/grizzoscuro"
+                android:visibility="visible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView500" />
+
+            <Button
+                android:id="@+id/btnSelectImagenEd"
+                android:layout_width="175dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="48dp"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/btngriz"
+                android:text="Seleccionar Imagen"
+                android:textColor="@color/grizzoscuro"
+                android:visibility="visible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etLDescripColEd" />
+
+            <ImageView
+                android:id="@+id/ImgSeleccionadaEd"
+                android:layout_width="110dp"
+                android:layout_height="220dp"
+                android:layout_marginTop="36dp"
+                android:visibility="visible"
+                app:layout_constraintTop_toBottomOf="@+id/btnSelectImagenEd"
+                tools:layout_editor_absoluteX="150dp"
+                tools:srcCompat="@tools:sample/avatars" />
+
+            <Button
+                android:id="@+id/btnDEditarCol"
+                android:layout_width="230dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="36dp"
+                android:background="@drawable/btn_azul"
+                android:fontFamily="@font/klee_one"
+                android:text="Actualizar Colección"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:visibility="visible"
+                app:layout_constraintTop_toBottomOf="@+id/ImgSeleccionadaEd"
+                tools:layout_editor_absoluteX="90dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>

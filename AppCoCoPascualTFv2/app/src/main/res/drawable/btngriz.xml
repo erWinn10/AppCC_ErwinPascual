@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape>
+            <solid android:color="#52D3D3D3" /> <!-- Color de fondo -->
+            <corners android:radius="40dp" /> <!-- Curvatura de 40dp -->
+        </shape>
+    </item>
+</layer-list>

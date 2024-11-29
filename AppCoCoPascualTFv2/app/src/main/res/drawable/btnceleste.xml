@@ -1,0 +1,14 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape>
+            <solid android:color="#5280E2F3" /> <!-- Color de fondo -->
+            <corners android:radius="40dp" /> <!-- Curvatura de 40dp -->
+        </shape>
+    </item>
+    <item android:top="0dp" android:left="0dp" android:right="0dp" android:bottom="0dp">
+        <shape>
+            <solid android:color="#5280E2F3" /> <!-- Color más oscuro con transparencia -->
+            <corners android:radius="40dp" />
+        </shape>
+    </item>
+</layer-list>

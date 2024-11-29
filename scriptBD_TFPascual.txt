@@ -1,0 +1,144 @@
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+-- Schema appcocobolov2
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema appcocobolov2
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `appcocobolov2` DEFAULT CHARACTER SET utf8mb3 ;
+USE `appcocobolov2` ;
+
+-- -----------------------------------------------------
+-- Table `appcocobolov2`.`coleccion`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `appcocobolov2`.`coleccion` (
+  `col_id` INT NOT NULL AUTO_INCREMENT,
+  `col_nombre` VARCHAR(45) NOT NULL,
+  `col_descripcion` VARCHAR(45) NOT NULL,
+  `col_imagenref` VARCHAR(250) NULL DEFAULT NULL,
+  PRIMARY KEY (`col_id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 1
+DEFAULT CHARACTER SET = utf8mb3;
+
+
+-- -----------------------------------------------------
+-- Table `appcocobolov2`.`articulo`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `appcocobolov2`.`articulo` (
+  `art_id` INT NOT NULL AUTO_INCREMENT,
+  `art_nombre` VARCHAR(45) NOT NULL,
+  `art_precio` DECIMAL(8,2) NOT NULL,
+  `art_fecha_registro` DATE NULL DEFAULT NULL,
+  `art_imagen` VARCHAR(250) NULL DEFAULT NULL,
+  `col_id` INT NOT NULL,
+  PRIMARY KEY (`art_id`),
+  INDEX `fk_articulo_coleccion_idx` (`col_id` ASC) VISIBLE,
+  CONSTRAINT `fk_articulo_coleccion`
+    FOREIGN KEY (`col_id`)
+    REFERENCES `appcocobolov2`.`coleccion` (`col_id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 1
+DEFAULT CHARACTER SET = utf8mb3;
+
+
+-- -----------------------------------------------------
+-- Table `appcocobolov2`.`roles`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `appcocobolov2`.`roles` (
+  `rol_id` INT NOT NULL AUTO_INCREMENT,
+  `rol_authority` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`rol_id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 1
+DEFAULT CHARACTER SET = utf8mb3;
+
+
+-- -----------------------------------------------------
+-- Table `appcocobolov2`.`usuarios`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `appcocobolov2`.`usuarios` (
+  `usu_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `usu_nombre` VARCHAR(45) NOT NULL,
+  `usu_correo` VARCHAR(45) NOT NULL,
+  `usu_contraseña` VARCHAR(45) NOT NULL,
+  `rol_id` INT NOT NULL,
+  PRIMARY KEY (`usu_id`),
+  INDEX `fk_usuarios_roles1_idx` (`rol_id` ASC) VISIBLE,
+  CONSTRAINT `fk_usuarios_roles1`
+    FOREIGN KEY (`rol_id`)
+    REFERENCES `appcocobolov2`.`roles` (`rol_id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 1
+DEFAULT CHARACTER SET = utf8mb3;
+
+
+-- -----------------------------------------------------
+-- Table `appcocobolov2`.`pedido`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `appcocobolov2`.`pedido` (
+  `ped_id` INT NOT NULL AUTO_INCREMENT,
+  `ped_cantidad` VARCHAR(45) NOT NULL,
+  `ped_fecha_registro` DATE NULL DEFAULT NULL,
+  `art_id` INT NOT NULL,
+  `usu_id` INT UNSIGNED NOT NULL,
+  PRIMARY KEY (`ped_id`),
+  INDEX `fk_pedido_articulo1_idx` (`art_id` ASC) VISIBLE,
+  INDEX `fk_pedido_usuarios1_idx` (`usu_id` ASC) VISIBLE,
+  CONSTRAINT `fk_pedido_articulo1`
+    FOREIGN KEY (`art_id`)
+    REFERENCES `appcocobolov2`.`articulo` (`art_id`),
+  CONSTRAINT `fk_pedido_usuarios1`
+    FOREIGN KEY (`usu_id`)
+    REFERENCES `appcocobolov2`.`usuarios` (`usu_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb3;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+
+#Coleccion
+INSERT INTO `coleccion` VALUES 
+(null, 'Bebitos', 'Sets de cuna para bebitos', 'elefanteparaguasceleste'),
+(null, 'Bebitas', 'Sets de cuna para bebitas', 'faraonrosado'),
+(null, 'Accesorios', 'Accesorios para acompañar la cuna', 'portacarro');
+
+#Articulo
+INSERT INTO `articulo` VALUES
+(null, 'Rey León - Verde', 140.00, '2023-11-18', 'leontv', 1),
+(null, 'Barcos - Celeste bb', 130.00, '2023-11-18', 'barcoceleste', 1),
+(null, 'Faraón - Rosado',130.00, '2023-11-18', 'faraonrosado', 2),
+(null, 'PortaCarrito - Azul', 45.00, '2023-11-18', 'portacarro', 3),
+(null, 'PortaGus - Rosado', 45.00, '2023-11-18', 'portagusano', 3),
+(null, 'Animalitos - Maiz', 135.00, '2023-11-29', 'animalesmaiz', 1),
+(null, 'Hipo - Rosado bebé', 140.00, '2023-12-01', 'hiporosadobb', 2),
+(null, 'LeoFante - Blanco', 280.00, '2023-12-02', 'leofante', 1),
+(null, 'ElefanteGlobo - Rosado bebé', 139.00, '2023-12-02', 'elefanterosadobb', 2),
+(null, 'Faraón - Marrón', 130.00, '2023-12-02', 'faraonmarron', 1);
+
+#Roles
+insert into roles VALUES(NULL, 'ROL_ADMIN');
+insert into roles VALUES(NULL, 'ROL_SUPERVISOR');
+insert into roles VALUES(NULL, 'ROL_CLIENTE');
+
+#Usuarios
+INSERT INTO `usuarios` VALUES 
+(null, 'ADMIN', 'admin@gmail.com', 'ADMIN', 1),
+(null, 'Erwin', '0erwin@gmail.com', 'Erwin', 1);
+
+select * from usuarios
+
